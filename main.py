@@ -74,12 +74,12 @@ def main():
                     voiture = parking.get_car_at_index(index-1)
                     if voiture:
                         parking.remove_car_by_index(index-1)
+                        parking.remove_car_from_excel(index-1, file_path)
                         print("Voiture supprimée avec succès!")
                     else:
                         print("Aucune voiture à cet emplacement.")
                 else:
                     print("Index invalide. Veuillez choisir un index valide.")
-
 
             elif choice == "5":
                 # Modifier les données d'une voiture

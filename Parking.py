@@ -85,3 +85,21 @@ class Parking:
                 print(f"Une erreur s'est produite lors de la mise à jour de la voiture dans le fichier Excel: {str(e)}")
         else:
             print(f"Aucune voiture trouvée à l'index {index}.")
+            
+    
+    def remove_car_from_excel(self, index: int, file_path: str) -> None:
+        if 0 <= index < len(self.cars):
+            try:
+                df = pd.read_excel(file_path)
+                car = self.cars[index]
+                df = df.drop(index)
+                df.reset_index(drop=True, inplace=True)
+                df.to_excel(file_path, index=False)
+                self.cars.pop(index)
+                print(f"La voiture à l'index {index} a été supprimée du fichier Excel.")
+            except FileNotFoundError:
+                print("Le fichier Excel spécifié est introuvable.")
+            except Exception as e:
+                print(f"Une erreur s'est produite lors de la suppression de la voiture du fichier Excel: {str(e)}")
+        else:
+            print(f"Aucune voiture trouvée à l'index {index}.")
